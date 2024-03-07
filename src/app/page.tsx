@@ -1,4 +1,7 @@
 "use client"
+import Image from "next/image";
+import { useState } from 'react';
+import axios from 'axios';
 
 import Image from "next/image";
 import React, { Component } from "react";
@@ -77,6 +80,20 @@ export default function Home() {
     { value: "puroguraminngu", label: "プログラミング" },
 
   ];
+  const [cardName, setCardName] = useState('');
+
+  const handleCreateCard = async () => {
+    try {
+      const response = await axios.post(
+        'https://api.trello.com/1/cards?key=process.env.REACT_APP_APIKEY&token=process.env.REACT_APP_APITOKEN&idList=process.envREACT_APP_APILIST',
+        {}
+      );
+
+      console.log('Card created successfully:', response.data);
+    } catch (error) {
+      console.error('Error creating card:', error);
+    }
+  };
 
   return (
       <div style={{textAlign:'center'}}>
