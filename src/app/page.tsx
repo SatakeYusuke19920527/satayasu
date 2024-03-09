@@ -5,6 +5,11 @@ import axios from 'axios';
 import React, { Component } from "react";
 import Select from "react-select";
 
+console.log(process.env.NEXT_PUBLIC_APP_APIKEY)
+console.log(process.env.NEXT_PUBLIC_APP_APITOKEN)
+console.log(process.env.NEXT_PUBLIC_APP_APILIST)
+
+
 export default function Home() {
   const optiongakunen = [
     { value: "syouiti", label: "小学1年生" },
