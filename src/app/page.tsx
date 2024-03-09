@@ -4,9 +4,6 @@ import Image from "next/image";
 import { useState } from 'react';
 import axios from 'axios';
 
-console.log(process.env.NEXT_PUBLIC_APP_APIKEY);
-console.log(process.env.NEXT_PUBLIC_APP_APITOKEN);
-console.log(process.env.NEXT_PUBLIC_APP_APILIST);
 
 
 
