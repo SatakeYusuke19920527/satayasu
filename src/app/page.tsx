@@ -2,9 +2,6 @@
 import Image from "next/image";
 import { useState } from 'react';
 import axios from 'axios';
-
-
-import Image from "next/image";
 import React, { Component } from "react";
 import Select from "react-select";
 
@@ -143,7 +140,7 @@ export default function Home() {
         <option value="eiken">小学1年生</option>
         <option value="programing">プログラミング</option>
         </select>
-      </div> */}
+      </div> 
       <div className="wa">
       <div><label>名前</label><input type="namae" className="namae" placeholder="名前を入力してください"/></div>
         <div><label>学年<Select options={optiongakunen} className="gakunen" placeholder="学年を入力してください"/></label></div>
