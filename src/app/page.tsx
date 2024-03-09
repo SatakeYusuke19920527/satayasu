@@ -74,57 +74,25 @@ export default function Home() {
     { value: "eigo", label: "英語" },
     { value: "rika", label: "理科" },
     { value: "syakai", label: "社会" },
-    { value: "puroguraminngu", label: "プログラミング" },
+    { value: "puroguraminngu", label: "プログラミング" }
 
   ];
 
   return (
-      <div style={{textAlign:'center'}}>
-        <h1 className="sa">さたやす</h1>
-        {/* 行を合わせたいぜ*/}
-      {/* <label>学年<input type="text" style={{ padding: "7px" }}></input></label><br />
-      <label>名前<input type="text" style={{padding:"7px"}}></input></label><br/>
-      <label>日付<input type="text" style={{ padding: "7px" }}></input></label><br />
-      <label>教科<input type="text" style={{padding:"7px",marginTop:"4px"}}></input></label><br/>
-      <label>理由<input type="text" style={{ padding: "7px", marginTop: "4px" }}></input></label><br />
-      <div className="selectt">
-      <select name="kyouka" id="pet-select">
-        <option selected disabled>選んでね</option>
-        <option value="kokugo">国語</option>
-        <option value="sannsuu">算数</option>
-        <option value="suugaku">数学</option>
-        <option value="rika">理科</option>
-        <option value="syakai">社会</option>
-        <option value="eigo">英語</option>
-        <option value="eiken">英検</option>
-        <option value="programing">プログラミング</option>
-        </select>
-        <select name="gakunen" id="pet-select">
-        <option selected disabled>選んでね</option>
-        <option value="kokugo">小学1年生</option>
-        <option value="sannsuu">小学2年生</option>
-        <option value="suugaku">小学3年生</option>
-        <option value="rika">小学4年生</option>
-        <option value="syakai">小学5年生</option>
-        <option value="eigo">小学6年生</option>
-        <option value="eiken">小学1年生</option>
-        <option value="programing">プログラミング</option>
-        </select>
-      </div> */}
+      <div className="da" style={{textAlign:'center'}}>
+        <h1 className="sa">佐竹塾欠席連絡サイト</h1>
       <div className="wa">
-      <div><label>名前</label><input type="namae" className="namae" placeholder="名前を入力してください"/></div>
-        <div><label>学年<Select options={optiongakunen} className="gakunen" placeholder="学年を入力してください"/></label></div>
-        
-        {/* <div><label>日付<Select options={optiontuki} className="tuki" placeholder="日付を入力してください" /><Select options={optionhi} className="hi" placeholder="教科を入力してください" /></label></div> */}
-        <div><label>日付<div className='hizuke'>
-          <Select options={optiontuki} className="hizukee" placeholder="日付" />
+        <div className="qa"><label>名前<div><input type="namae" className="namae" placeholder="名前を入力してください"/></div></label></div>
+        <div className="qa"><label>学年<Select options={optiongakunen} className="gakunen" placeholder="学年を入力してください"/></label></div>
+        <div className="qa"><label>日付<div className='hizuke'>
+          <Select options={optiontuki} className="hizukee" placeholder="月" />
           <Select options={optionhi} className="hizukee" placeholder="日" /></div></label></div>
-        <div><label>教科<div className='kyoukaa'><Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください" /></div></label></div>
-        <div><label>理由<div><input type="namae" className="riyuu" placeholder="理由を入力してください" /></div></label></div>
+        <div className="qa"><label>教科<div className='kyoukaa'><Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください"/></div></label></div>
+        <div className="qa"><label>理由<div><input type="namae" className="riyuu" placeholder="理由を入力してください" /></div></label></div>
       {/* react input セレクトボックス */}
       {/* いい感じのサイト　https://qiita.com/Hitomi_Nagano/items/c00df24dc24e0329167d */}
-        </div>
-        <button>送信</button>
       </div>
+        <button className="button">送信</button>
+    </div>
   );
 }
