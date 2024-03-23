@@ -75,7 +75,7 @@ export default function Home() {
     { value: "eigo", label: "英語" },
     { value: "rika", label: "理科" },
     { value: "syakai", label: "社会" },
-    { value: "puroguraminngu", label: "プログラミング" },
+    { value: "puroguraminngu", label: "プログラミング" }
 
   ];
   const [cardName, setCardName] = useState('');
@@ -107,6 +107,8 @@ export default function Home() {
   };
 
   return (
+      <div className="da" style={{textAlign:'center'}}>
+        <h1 className="sa">佐竹塾欠席連絡サイト</h1>
       <div style={{textAlign:'center'}}>
         <h1 className="sa">さたやす</h1>
         {/* 行を合わせたいぜ*/}
@@ -142,22 +144,21 @@ export default function Home() {
         </select>
       </div> 
       <div className="wa">
-      <div><label>名前</label><input type="namae" className="namae" placeholder="名前を入力してください"/></div>
-        <div><label>学年<Select options={optiongakunen} className="gakunen" placeholder="学年を入力してください"/></label></div>
-        
-        {/* <div><label>日付<Select options={optiontuki} className="tuki" placeholder="日付を入力してください" /><Select options={optionhi} className="hi" placeholder="教科を入力してください" /></label></div> */}
-        <div><label>日付<div className='hizuke'>
-          <Select options={optiontuki} className="hizukee" placeholder="日付" />
+        <div className="qa"><label>名前<div><input type="namae" className="namae" placeholder="名前を入力してください"/></div></label></div>
+        <div className="qa"><label>学年<Select options={optiongakunen} className="gakunen" placeholder="学年を入力してください"/></label></div>
+        <div className="qa"><label>日付<div className='hizuke'>
+          <Select options={optiontuki} className="hizukee" placeholder="月" />
           <Select options={optionhi} className="hizukee" placeholder="日" /></div></label></div>
-        <div><label>教科<div className='kyoukaa'><Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください" /></div></label></div>
-        <div><label>理由<div><input type="namae" className="riyuu" placeholder="理由を入力してください" /></div></label></div>
+        <div className="qa"><label>教科<div className='kyoukaa'><Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください"/></div></label></div>
+        <div className="qa"><label>理由<div><input type="namae" className="riyuu" placeholder="理由を入力してください" /></div></label></div>
       {/* react input セレクトボックス */}
 
         <button onClick={handleCreateCard}>送信</button>
 
       {/* いい感じのサイト　https://qiita.com/Hitomi_Nagano/items/c00df24dc24e0329167d */}
         </div>
-
       </div>
+        <button className="button">送信</button>
+    </div>
   );
 }
