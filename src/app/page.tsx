@@ -80,24 +80,29 @@ export default function Home() {
   ];
   const [cardName, setCardName] = useState('');
   const [grade, setGrade] = useState('');
-  const [name, setName] = useState('');
+  const [subject, setSubject] = useState('');
   const [day, setDay] = useState('');
   const [reason, setReason] = useState('');
-
+  const [schoolName, setSchoolName] = useState('');
+  const descriptionWithNewLines = reason + '\n' + grade + '\n' + schoolName;
 
 
   const handleCreateCard = async () => {
     
     try {
-      setCardName(cardName + grade + name + day + reason)
       const response = await axios.post(
-        `https://api.trello.com/1/cards?key=${process.env.NEXT_PUBLIC_APP_APIKEY}&token=${process.env.NEXT_PUBLIC_APP_APITOKEN}&name=${cardName}&idList=${process.env.NEXT_PUBLIC_APP_APILIST}`
+        `https://api.trello.com/1/cards?key=${process.env.NEXT_PUBLIC_APP_APIKEY}&token=${process.env.NEXT_PUBLIC_APP_APITOKEN}&idList=${process.env.NEXT_PUBLIC_APP_APILIST}`
 ,
         {
           method: 'POST',
           headers: {
             'Accept': 'application/json'
-        }
+        },
+          name:(day + " " + cardName + " " + subject + " "  ),
+          desc:descriptionWithNewLines
+          
+
+        
     });
 
       console.log('Card created successfully:', response.data);
@@ -111,10 +116,11 @@ export default function Home() {
         <h1 className="sa">さたやす</h1>
         {/* 行を合わせたいぜ*/}
 
+      <label>学校<input type="text" style={{ padding: "7px" }} value={schoolName} onChange={(e) => setSchoolName(e.target.value)}></input></label><br />
       <label>学年<input type="text" style={{ padding: "7px" }} value={grade} onChange={(e) => setGrade(e.target.value)}></input></label><br />
-      <label>名前<input type="text" style={{padding:"7px"}} value={name} onChange={(e) => setName(e.target.value)}></input></label><br/>
+      <label>名前<input type="text" style={{padding:"7px"}} value={cardName} onChange={(e) => setCardName(e.target.value)}></input></label><br/>
       <label>日付<input type="text" style={{ padding: "7px" }} value={day} onChange={(e) => setDay(e.target.value)}></input></label><br />
-      <label>教科<input type="text" style={{padding:"7px",marginTop:"4px"}}></input></label><br/>
+      <label>教科<input type="text" style={{padding:"7px",marginTop:"4px"}} value={subject} onChange={(e) => setSubject(e.target.value)}></input></label><br/>
       <label>理由<input type="text" style={{ padding: "7px", marginTop: "4px" }} value={reason} onChange={(e) => setReason(e.target.value)}></input></label><br />
       <div className="select">
 
