@@ -2,8 +2,6 @@
 import Image from "next/image";
 import { useState } from 'react';
 import axios from 'axios';
-
-import Image from "next/image";
 import React, { Component } from "react";
 import Select from "react-select";
 
@@ -81,13 +79,26 @@ export default function Home() {
 
   ];
   const [cardName, setCardName] = useState('');
+  const [grade, setGrade] = useState('');
+  const [name, setName] = useState('');
+  const [day, setDay] = useState('');
+  const [reason, setReason] = useState('');
+
+
 
   const handleCreateCard = async () => {
+    
     try {
+      setCardName(cardName + grade + name + day + reason)
       const response = await axios.post(
-        'https://api.trello.com/1/cards?key=process.env.REACT_APP_APIKEY&token=process.env.REACT_APP_APITOKEN&idList=process.envREACT_APP_APILIST',
-        {}
-      );
+        `https://api.trello.com/1/cards?key=${process.env.NEXT_PUBLIC_APP_APIKEY}&token=${process.env.NEXT_PUBLIC_APP_APITOKEN}&name=${cardName}&idList=${process.env.NEXT_PUBLIC_APP_APILIST}`
+,
+        {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+        }
+    });
 
       console.log('Card created successfully:', response.data);
     } catch (error) {
@@ -98,6 +109,40 @@ export default function Home() {
   return (
       <div className="da" style={{textAlign:'center'}}>
         <h1 className="sa">佐竹塾欠席連絡サイト</h1>
+      <div style={{textAlign:'center'}}>
+        <h1 className="sa">さたやす</h1>
+        {/* 行を合わせたいぜ*/}
+
+      <label>学年<input type="text" style={{ padding: "7px" }} value={grade} onChange={(e) => setGrade(e.target.value)}></input></label><br />
+      <label>名前<input type="text" style={{padding:"7px"}} value={name} onChange={(e) => setName(e.target.value)}></input></label><br/>
+      <label>日付<input type="text" style={{ padding: "7px" }} value={day} onChange={(e) => setDay(e.target.value)}></input></label><br />
+      <label>教科<input type="text" style={{padding:"7px",marginTop:"4px"}}></input></label><br/>
+      <label>理由<input type="text" style={{ padding: "7px", marginTop: "4px" }} value={reason} onChange={(e) => setReason(e.target.value)}></input></label><br />
+      <div className="select">
+
+      <select name="kyouka" id="pet-select">
+        <option disabled>選んでね</option>
+        <option value="kokugo">国語</option>
+        <option value="sannsuu">算数</option>
+        <option value="suugaku">数学</option>
+        <option value="rika">理科</option>
+        <option value="syakai">社会</option>
+        <option value="eigo">英語</option>
+        <option value="eiken">英検</option>
+        <option value="programing">プログラミング</option>
+        </select>
+        <select name="gakunen" id="pet-select">
+        <option selected disabled>選んでね</option>
+        <option value="kokugo">小学1年生</option>
+        <option value="sannsuu">小学2年生</option>
+        <option value="suugaku">小学3年生</option>
+        <option value="rika">小学4年生</option>
+        <option value="syakai">小学5年生</option>
+        <option value="eigo">小学6年生</option>
+        <option value="eiken">小学1年生</option>
+        <option value="programing">プログラミング</option>
+        </select>
+      </div> 
       <div className="wa">
         <div className="qa"><label>名前<div><input type="namae" className="namae" placeholder="名前を入力してください"/></div></label></div>
         <div className="qa"><label>学年<Select options={optiongakunen} className="gakunen" placeholder="学年を入力してください"/></label></div>
@@ -107,7 +152,11 @@ export default function Home() {
         <div className="qa"><label>教科<div className='kyoukaa'><Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください"/></div></label></div>
         <div className="qa"><label>理由<div><input type="namae" className="riyuu" placeholder="理由を入力してください" /></div></label></div>
       {/* react input セレクトボックス */}
+
+        <button onClick={handleCreateCard}>送信</button>
+
       {/* いい感じのサイト　https://qiita.com/Hitomi_Nagano/items/c00df24dc24e0329167d */}
+        </div>
       </div>
         <button className="button">送信</button>
     </div>
