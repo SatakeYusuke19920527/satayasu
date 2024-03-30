@@ -36,37 +36,37 @@ export default function Home() {
     { value: "juunigatu", label: "12月" }
   ];
    const optionhi = [
-    { value: "iti", label: "1" },
-    { value: "ni", label: "2" },
-    { value: "san", label: "3" },
-    { value: "yon", label: "4" },
-    { value: "go", label: "5" },
-    { value: "roku", label: "6" },
-    { value: "nana", label: "7" },
-    { value: "hati", label: "8" },
-    { value: "kyuu", label: "9" },
-    { value: "juu", label: "10" },
-    { value: "juuiti", label: "11" },
-    { value: "juuni", label: "12" },
-    { value: "juusan", label: "13" },
-    { value: "juuyon", label: "14" },
-    { value: "juugo", label: "15" },
-    { value: "juuroku", label: "16" },
-    { value: "juunana", label: "17" },
-    { value: "juuhati", label: "18" },
-    { value: "juukyuu", label: "19" },
-    { value: "nijuu", label: "20" },
-    { value: "nijuuiti", label: "21" },
-    { value: "nijuuni", label: "22" },
-    { value: "nijuusan", label: "23" },
-    { value: "nijuuyon", label: "24" },
-    { value: "nijuugo", label: "25" },
-    { value: "nijuuroku", label: "26" },
-    { value: "nijuunana", label: "27" },
-    { value: "nijuuhati", label: "28" },
-    { value: "nijuukyu", label: "29" },
-    { value: "sanjuu", label: "30" },
-    { value: "sanjuuiti", label: "31" }
+    { value: "iti", label: "1日" },
+    { value: "ni", label: "2日" },
+    { value: "san", label: "3日" },
+    { value: "yon", label: "4日" },
+    { value: "go", label: "5日" },
+    { value: "roku", label: "6日" },
+    { value: "nana", label: "7日" },
+    { value: "hati", label: "8日" },
+    { value: "kyuu", label: "9日" },
+    { value: "juu", label: "10日" },
+    { value: "juuiti", label: "11日" },
+    { value: "juuni", label: "12日" },
+    { value: "juusan", label: "13日" },
+    { value: "juuyon", label: "14日" },
+    { value: "juugo", label: "15日" },
+    { value: "juuroku", label: "16日" },
+    { value: "juunana", label: "17日" },
+    { value: "juuhati", label: "18日" },
+    { value: "juukyuu", label: "19日" },
+    { value: "nijuu", label: "20日" },
+    { value: "nijuuiti", label: "21日" },
+    { value: "nijuuni", label: "22日" },
+    { value: "nijuusan", label: "23日" },
+    { value: "nijuuyon", label: "24日" },
+    { value: "nijuugo", label: "25日" },
+    { value: "nijuuroku", label: "26日" },
+    { value: "nijuunana", label: "27日" },
+    { value: "nijuuhati", label: "28日" },
+    { value: "nijuukyu", label: "29日" },
+    { value: "sanjuu", label: "30日" },
+    { value: "sanjuuiti", label: "31日" }
   ];
   const optionkyouka = [
     { value: "kokugo", label: "国語" },
@@ -109,8 +109,7 @@ export default function Home() {
   return (
       <div className="da" style={{textAlign:'center'}}>
         <h1 className="sa">佐竹塾欠席連絡サイト</h1>
-      <div style={{textAlign:'center'}}>
-        <h1 className="sa">さたやす</h1>
+        <h3 className="sa">さたやす</h3>
         {/* 行を合わせたいぜ*/}
 
       <label>学年<input type="text" style={{ padding: "7px" }} value={grade} onChange={(e) => setGrade(e.target.value)}></input></label><br />
@@ -150,14 +149,12 @@ export default function Home() {
           <Select options={optiontuki} className="hizukee" placeholder="月" />
           <Select options={optionhi} className="hizukee" placeholder="日" /></div></label></div>
         <div className="qa"><label>教科<div className='kyoukaa'><Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください"/></div></label></div>
-        <div className="qa"><label>理由<div><input type="namae" className="riyuu" placeholder="理由を入力してください" /></div></label></div>
-      {/* react input セレクトボックス */}
+        <div className="qa"><label>理由<div><input type="namae" className="riyuu" placeholder="例:おなかがいたいため" /></div></label></div>
 
         <button onClick={handleCreateCard}>送信</button>
 
       {/* いい感じのサイト　https://qiita.com/Hitomi_Nagano/items/c00df24dc24e0329167d */}
         </div>
-      </div>
         <button className="button">送信</button>
     </div>
   );
