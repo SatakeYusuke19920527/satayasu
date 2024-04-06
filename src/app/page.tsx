@@ -1,8 +1,7 @@
 "use client"
-import Image from "next/image";
-import { useState } from 'react';
+import Image from "next/image"
 import axios from 'axios';
-import React, { Component } from "react";
+import React, { Component, ChangeEvent, useState, memo  } from "react";
 import Select from "react-select";
 
 export default function Home() {
@@ -79,15 +78,16 @@ export default function Home() {
 
   ];
   const [cardName, setCardName] = useState('');
-  const [grade, setGrade] = useState('');
-  const [name, setName] = useState('');
-  const [day, setDay] = useState('');
+  const [grade, setGrade] = useState<string>('');
+  const [name, setNames] = useState<string>('');
+  const [day, setDay] = useState<string>('');
   const [reason, setReason] = useState('');
+const [ contents, setContents ] = useState<string>('')
 
-
-
+  const onChangeNames = (e: ChangeEvent<HTMLInputElement>) => { setNames(e.target.value) }
+  const onChangeContents = (e: ChangeEvent<HTMLInputElement>) => {setContents(e.target.value)}
+  
   const handleCreateCard = async () => {
-    
     try {
       setCardName(cardName + grade + name + day + reason)
       const response = await axios.post(
@@ -112,13 +112,12 @@ export default function Home() {
         <h3 className="sa">さたやす</h3>
         {/* 行を合わせたいぜ*/}
 
-      <label>学年<input type="text" style={{ padding: "7px" }} value={grade} onChange={(e) => setGrade(e.target.value)}></input></label><br />
+      {/* <label>学年<input type="text" style={{ padding: "7px" }} value={grade} onChange={(e) => setGrade(e.target.value)}></input></label><br />
       <label>名前<input type="text" style={{padding:"7px"}} value={name} onChange={(e) => setName(e.target.value)}></input></label><br/>
       <label>日付<input type="text" style={{ padding: "7px" }} value={day} onChange={(e) => setDay(e.target.value)}></input></label><br />
       <label>教科<input type="text" style={{padding:"7px",marginTop:"4px"}}></input></label><br/>
       <label>理由<input type="text" style={{ padding: "7px", marginTop: "4px" }} value={reason} onChange={(e) => setReason(e.target.value)}></input></label><br />
       <div className="select">
-
       <select name="kyouka" id="pet-select">
         <option disabled>選んでね</option>
         <option value="kokugo">国語</option>
@@ -141,21 +140,26 @@ export default function Home() {
         <option value="eiken">小学1年生</option>
         <option value="programing">プログラミング</option>
         </select>
-      </div> 
-      <div className="wa">
-        <div className="qa"><label>名前<div><input type="namae" className="namae" placeholder="名前を入力してください"/></div></label></div>
-        <div className="qa"><label>学年<Select options={optiongakunen} className="gakunen" placeholder="学年を入力してください"/></label></div>
-        <div className="qa"><label>日付<div className='hizuke'>
-          <Select options={optiontuki} className="hizukee" placeholder="月" />
-          <Select options={optionhi} className="hizukee" placeholder="日" /></div></label></div>
-        <div className="qa"><label>教科<div className='kyoukaa'><Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください"/></div></label></div>
-        <div className="qa"><label>理由<div><input type="namae" className="riyuu" placeholder="例:おなかがいたいため" /></div></label></div>
+      </div>  */}
 
-        <button onClick={handleCreateCard}>送信</button>
+      <div className="wa">
+        <div className="qa"><label>名前<div>
+          <input type="namae" className="namae" placeholder="名前を入力してください" value={name} onChange={onChangeNames}/></div></label></div>
+        <div className="qa"><label>学年<div className='gakunen' onChange={onChangeContents}>
+          <Select options={optiongakunen} className="gakunenn" placeholder="学年を入力してください" value={grade}  /></div></label></div>
+        <div className="qa"><label>日付<div className='hizuke'  onChange={onChangeContents}>
+          <Select options={optiontuki} className="hizukee" placeholder="月" value={day}/>
+          <Select options={optionhi} className="hizukee" placeholder="日" value={day}/></div></label></div>
+        <div className="qa"><label>教科<div className='kyoukaa'>
+          <Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください" /></div></label></div>
+        <div className="qa"><label>理由<div>
+          <input type="namae" className="riyuu" placeholder="例:おなかがいたいため" value={reason} onChange={(e) => setReason(e.target.value)} /></div></label></div>
+
+        {/* <button onClick={handleCreateCard}>送信</button> */}
 
       {/* いい感じのサイト　https://qiita.com/Hitomi_Nagano/items/c00df24dc24e0329167d */}
         </div>
-        <button className="button">送信</button>
+        <button onClick={handleCreateCard} className="button">送信</button>
     </div>
   );
 }
