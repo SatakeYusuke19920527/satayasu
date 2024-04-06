@@ -145,7 +145,7 @@ const [ contents, setContents ] = useState<string>('')
       <div className="wa">
         <div className="qa"><label>名前<div>
           <input type="namae" className="namae" placeholder="名前を入力してください" value={name} onChange={onChangeNames}/></div></label></div>
-        <div className="qa"><label>学年<div className='gakunen' onChange={onChangeContents}>
+        {/* <div className="qa"><label>学年<div className='gakunen' onChange={onChangeContents}>
           <Select options={optiongakunen} className="gakunenn" placeholder="学年を入力してください" value={grade}  /></div></label></div>
         <div className="qa"><label>日付<div className='hizuke'  onChange={onChangeContents}>
           <Select options={optiontuki} className="hizukee" placeholder="月" value={day}/>
@@ -153,7 +153,7 @@ const [ contents, setContents ] = useState<string>('')
         <div className="qa"><label>教科<div className='kyoukaa'>
           <Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください" /></div></label></div>
         <div className="qa"><label>理由<div>
-          <input type="namae" className="riyuu" placeholder="例:おなかがいたいため" value={reason} onChange={(e) => setReason(e.target.value)} /></div></label></div>
+          <input type="namae" className="riyuu" placeholder="例:おなかがいたいため" value={reason} onChange={(e) => setReason(e.target.value)} /></div></label></div> */}
 
         {/* <button onClick={handleCreateCard}>送信</button> */}
 
