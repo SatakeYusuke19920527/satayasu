@@ -4,6 +4,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import React, { Component } from "react";
 import Select from "react-select";
+import { createCard } from "./models/api/createCardApplicationService";
+
 
 export default function Home() {
   const optiongakunen = [
@@ -84,31 +86,26 @@ export default function Home() {
   const [day, setDay] = useState('');
   const [reason, setReason] = useState('');
   const [schoolName, setSchoolName] = useState('');
-  const descriptionWithNewLines = reason + '\n' + grade + '\n' + schoolName;
-
+  const [errorText, setErrorText] = useState('');
+  const sendCardName = day + " " + cardName + " " + subject + " " 
+  const sendDescName = reason + '\n' + grade + '\n' + schoolName;
 
   const handleCreateCard = async () => {
-    
-    try {
-      const response = await axios.post(
-        `https://api.trello.com/1/cards?key=${process.env.NEXT_PUBLIC_APP_APIKEY}&token=${process.env.NEXT_PUBLIC_APP_APITOKEN}&idList=${process.env.NEXT_PUBLIC_APP_APILIST}`
-,
-        {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json'
-        },
-          name:(day + " " + cardName + " " + subject + " "  ),
-          desc:descriptionWithNewLines
-          
-
-        
-    });
-
-      console.log('Card created successfully:', response.data);
-    } catch (error) {
-      console.error('Error creating card:', error);
+    if(day == "" ){
+      setErrorText("全て入力してください")
+    }else if(cardName == ""){
+      setErrorText("全て入力してください")
+    }else if(subject == ""){
+      setErrorText("全て入力してください")
+    }else if(reason == ""){
+      setErrorText("全て入力してください")
+    }else if(grade == ""){
+      setErrorText("全て入力してください")
+    }else if(schoolName == ""){
+      setErrorText("全て入力してください")
     }
+    console.log(sendCardName,sendDescName)
+    createCard({sendCardName,sendDescName})
   };
 
   return (
