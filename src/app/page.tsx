@@ -1,11 +1,19 @@
 "use client"
+import "./globals.css";
 import Image from "next/image"
 import axios from 'axios';
 import React, { Component, ChangeEvent, useState, memo  } from "react";
 import Select from "react-select";
+import { createCard } from "./models/api/createCardApplicationService";
 
 export default function Home() {
-  const optiongakunen = [
+  interface GradeOption { value: string; label: string; }
+  interface MonthOption { value: string; label: string; }
+  interface SelectOption { value: string; label: string; }
+  interface SubjectOption {value: string;label: string;}
+
+
+  const optiongakunen :GradeOption[] = [
     { value: "syouiti", label: "小学1年生" },
     { value: "syouni", label: "小学2年生" },
     { value: "syousan", label: "小学3年生" },
@@ -20,7 +28,7 @@ export default function Home() {
     { value: "kousan", label: "高校3年生" },
     { value: "syakaizin", label: "社会人" }
   ];
-  const optiontuki = [
+  const optiontuki :MonthOption[] = [
     { value: "itigatu", label: "1月" },
     { value: "nigatu", label: "2月" },
     { value: "sangatu", label: "3月" },
@@ -34,7 +42,7 @@ export default function Home() {
     { value: "juuitigatu", label: "11月" },
     { value: "juunigatu", label: "12月" }
   ];
-   const optionhi = [
+   const optionhi :SelectOption[] = [
     { value: "iti", label: "1日" },
     { value: "ni", label: "2日" },
     { value: "san", label: "3日" },
@@ -67,7 +75,7 @@ export default function Home() {
     { value: "sanjuu", label: "30日" },
     { value: "sanjuuiti", label: "31日" }
   ];
-  const optionkyouka = [
+  const optionkyouka :SubjectOption[] = [
     { value: "kokugo", label: "国語" },
     { value: "sannsuu", label: "算数" },
     { value: "suugaku", label: "数学" },
@@ -77,87 +85,60 @@ export default function Home() {
     { value: "puroguraminngu", label: "プログラミング" }
 
   ];
-  const [cardName, setCardName] = useState('');
-  const [grade, setGrade] = useState<string>('');
-  const [name, setNames] = useState<string>('');
-  const [day, setDay] = useState<string>('');
-  const [reason, setReason] = useState('');
-const [ contents, setContents ] = useState<string>('')
+  const [cardName, setCardNames] = useState<string>('');
+  const [grade, setGrades] = useState<string>('');
+  const [subject, setSubjects] = useState<string>('');
+  const [day, setDays] = useState<string>('');
+  const [month, setMonthes] = useState<string>('');
+  const [reason, setReasons] = useState<string>('');
+  const [contents, setContents] = useState<string>('')
 
-  const onChangeNames = (e: ChangeEvent<HTMLInputElement>) => { setNames(e.target.value) }
-  const onChangeContents = (e: ChangeEvent<HTMLInputElement>) => {setContents(e.target.value)}
+  const onChangeNames = (e: ChangeEvent<HTMLInputElement>) => { setCardNames(e.target.value) }
+  const onChangeGrades = (GradedOption: GradeOption) => {setSubjects(GradedOption.label);};
+  const onChangeMonthes = (MonthedOption: MonthOption) => {setMonthes(MonthedOption.label);};
+  const onChangeDays = (SelectedOption: SelectOption) => { setDays(SelectedOption.label); };
+  const onChangeSubjects = (SubjectedOption: SubjectOption) => {setSubjects(SubjectedOption.label);};
+  const onChangeContents = (e: ChangeEvent<HTMLInputElement>) => { setContents(e.target.value) }
   
-  const handleCreateCard = async () => {
-    try {
-      setCardName(cardName + grade + name + day + reason)
-      const response = await axios.post(
-        `https://api.trello.com/1/cards?key=${process.env.NEXT_PUBLIC_APP_APIKEY}&token=${process.env.NEXT_PUBLIC_APP_APITOKEN}&name=${cardName}&idList=${process.env.NEXT_PUBLIC_APP_APILIST}`
-,
-        {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json'
-        }
-    });
+  const [schoolName, setSchoolName] = useState('');
+  const [errorText, setErrorText] = useState('');
+  const sendCardName = month+ " " + day + " " + cardName + " " + subject + " " 
+  const sendDescName = reason + '\n' + grade + '\n' + schoolName;
 
-      console.log('Card created successfully:', response.data);
-    } catch (error) {
-      console.error('Error creating card:', error);
+  const handleCreateCard = async () => {
+    if(day == "" ){
+      setErrorText("全て入力してください")
+    }else if(cardName == ""){
+      setErrorText("全て入力してください")
+    }else if(subject == ""){
+      setErrorText("全て入力してください")
+    }else if(reason == ""){
+      setErrorText("全て入力してください")
+    }else if(grade == ""){
+      setErrorText("全て入力してください")
+    }else if(schoolName == ""){
+      setErrorText("全て入力してください")
     }
+    console.log(sendCardName,sendDescName)
+    createCard({sendCardName,sendDescName})
   };
 
   return (
       <div className="da" style={{textAlign:'center'}}>
-        <h1 className="sa">佐竹塾欠席連絡サイト</h1>
-        <h3 className="sa">さたやす</h3>
-        {/* 行を合わせたいぜ*/}
-
-      {/* <label>学年<input type="text" style={{ padding: "7px" }} value={grade} onChange={(e) => setGrade(e.target.value)}></input></label><br />
-      <label>名前<input type="text" style={{padding:"7px"}} value={name} onChange={(e) => setName(e.target.value)}></input></label><br/>
-      <label>日付<input type="text" style={{ padding: "7px" }} value={day} onChange={(e) => setDay(e.target.value)}></input></label><br />
-      <label>教科<input type="text" style={{padding:"7px",marginTop:"4px"}}></input></label><br/>
-      <label>理由<input type="text" style={{ padding: "7px", marginTop: "4px" }} value={reason} onChange={(e) => setReason(e.target.value)}></input></label><br />
-      <div className="select">
-      <select name="kyouka" id="pet-select">
-        <option disabled>選んでね</option>
-        <option value="kokugo">国語</option>
-        <option value="sannsuu">算数</option>
-        <option value="suugaku">数学</option>
-        <option value="rika">理科</option>
-        <option value="syakai">社会</option>
-        <option value="eigo">英語</option>
-        <option value="eiken">英検</option>
-        <option value="programing">プログラミング</option>
-        </select>
-        <select name="gakunen" id="pet-select">
-        <option selected disabled>選んでね</option>
-        <option value="kokugo">小学1年生</option>
-        <option value="sannsuu">小学2年生</option>
-        <option value="suugaku">小学3年生</option>
-        <option value="rika">小学4年生</option>
-        <option value="syakai">小学5年生</option>
-        <option value="eigo">小学6年生</option>
-        <option value="eiken">小学1年生</option>
-        <option value="programing">プログラミング</option>
-        </select>
-      </div>  */}
-
+        <h1 className="aa">佐竹塾欠席連絡サイト</h1>
+        <h3 className="sa">~さたやす~</h3>
       <div className="wa">
         <div className="qa"><label>名前<div>
-          <input type="namae" className="namae" placeholder="名前を入力してください" value={name} onChange={onChangeNames}/></div></label></div>
-        {/* <div className="qa"><label>学年<div className='gakunen' onChange={onChangeContents}>
-          <Select options={optiongakunen} className="gakunenn" placeholder="学年を入力してください" value={grade}  /></div></label></div>
-        <div className="qa"><label>日付<div className='hizuke'  onChange={onChangeContents}>
-          <Select options={optiontuki} className="hizukee" placeholder="月" value={day}/>
-          <Select options={optionhi} className="hizukee" placeholder="日" value={day}/></div></label></div>
+          <input type="namae" className="namae" placeholder="名前を入力してください" value={cardName} onChange={(e) => setCardNames(e.target.value)} /></div></label></div>
+        <div className="qa"><label>学年<div className='gakunen'>
+          <Select options={optiongakunen} className="gakunenn" placeholder="学年を入力してください"value={grade ? { value: grade, label: grade } : null}onChange={(gradedOption) => setGrades(gradedOption ? gradedOption.label : '')}/></div></label></div>
+        <div className="qa"><label>日付<div className='hizuke'>
+          <Select options={optiontuki} className="hizukee" placeholder="月"value={month ? { value: month, label: month } : null}onChange={(monthedOption) => setMonthes(monthedOption ? monthedOption.label : '')}/>
+          <Select options={optionhi} className="hizukee" placeholder="日" value={day ? { value: day, label: day } : null}onChange={(selectedOption) => setDays(selectedOption ? selectedOption.label : '')} /></div></label></div>
         <div className="qa"><label>教科<div className='kyoukaa'>
-          <Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください" /></div></label></div>
+          <Select options={optionkyouka} className="kyouka" placeholder="教科を入力してください"value={subject ? { value: subject, label: subject } : null}onChange={(subjectedOption) => setSubjects(subjectedOption ? subjectedOption.label : '')}  /></div></label></div>
         <div className="qa"><label>理由<div>
-          <input type="namae" className="riyuu" placeholder="例:おなかがいたいため" value={reason} onChange={(e) => setReason(e.target.value)} /></div></label></div> */}
-
-        {/* <button onClick={handleCreateCard}>送信</button> */}
-
-      {/* いい感じのサイト　https://qiita.com/Hitomi_Nagano/items/c00df24dc24e0329167d */}
+          <input type="namae" className="riyuu" placeholder="例:おなかがいたいため" value={reason} onChange={(e) => setReasons(e.target.value)} /></div></label></div>
         </div>
         <button onClick={handleCreateCard} className="button">送信</button>
     </div>

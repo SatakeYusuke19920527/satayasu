@@ -1,7 +1,16 @@
+.aa {
+  color: #503200;
+  font-family: serif;
+  font-weight: bold;
+  margin-bottom: -10px;
+  margin-top: 30px;
+}
+
 .sa {
   color: #503200;
   font-family: serif;
   font-weight: bold;
+  margin-bottom: 30px;
 }
 
 .da {
@@ -14,7 +23,7 @@
   color: #503200;
   text-align: center;
   font-weight: bold;
-  font-family: serif, 'arial black';
+  font-family: serif, "arial black";
   font-size: 20px;
   font-family: serif;
   font-weight: bold;
@@ -30,7 +39,6 @@
 }
 
 .namae {
-  color: #503200;
   text-align: center;
   inline-size: 100%;
   font-size: 20px;
@@ -52,17 +60,6 @@
   border-radius: 7px;
 }
 
-/* .hi {
-  color: #503200;
-  text-align: center;
-  inline-size: 50%;
-  font-size: 20px;
-  border: 3px solid #b38a4c;
-  font-family: serif;
-  font-weight: bold;
-  border-radius: 7px;
-} */
-
 .hizukee {
   color: #503200;
   display: inline-block;
@@ -80,14 +77,13 @@
   text-align: center;
   font-size: 20px;
   border: 3px solid #b38a4c;
-  width: '100%';
+  width: "100%";
   font-family: serif;
   font-weight: bold;
   border-radius: 7px;
 }
 
 .riyuu {
-  color: #503200;
   text-align: center;
   font-size: 20px;
   border: 3px solid #b38a4c;
@@ -108,7 +104,7 @@
   background: #da8f18;
   color: #ffffff;
   line-height: 1em;
-  transition: .3s;
+  transition: 0.3s;
   border: 2px solid #da8f18;
   border-radius: 7px;
 }
