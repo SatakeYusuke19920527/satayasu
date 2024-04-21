@@ -46,7 +46,7 @@ export default function Home() {
       <label>理由<input type="text" style={{ padding: "7px", marginTop: "4px" }} value={reason} onChange={(e) => setReason(e.target.value)}></input></label><br />
       
         <p>{errorText}{successText}</p>
-        <button className="button">送信</button>
+        <button className="button" onClick={handleCreateCard}>送信</button>
     </div>
   );
 }
