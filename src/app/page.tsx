@@ -28,7 +28,7 @@ export default function Home() {
     console.log(sendCardName,sendDescName)
     createCard({sendCardName,sendDescName})
     setErrorText("")
-    setSuccessText("送信しました")
+    setSuccessText("送信しました✅")
     }
   };
 
@@ -45,7 +45,7 @@ export default function Home() {
       <label>教科<input type="text" style={{padding:"7px",marginTop:"4px"}} value={subject} onChange={(e) => setSubject(e.target.value)}></input></label><br/>
       <label>理由<input type="text" style={{ padding: "7px", marginTop: "4px" }} value={reason} onChange={(e) => setReason(e.target.value)}></input></label><br />
       
-        <p>{errorText}{successText}</p>
+        <p style={{color: "red"}}>{errorText}</p><p>{successText}</p>
         <button className="button" onClick={handleCreateCard}>送信</button>
     </div>
   );
