@@ -9,7 +9,6 @@ import { serializePageInfos } from "next/dist/build/utils";
 
 
 export default function Home() {
-  
   const [cardName, setCardName] = useState('');
   const [grade, setGrade] = useState('');
   const [subject, setSubject] = useState('');
@@ -34,8 +33,9 @@ export default function Home() {
   };
 
   return (
-      <div style={{textAlign:'center'}}>
-        <h1 className="sa">さたやす</h1>
+      <div className="da" style={{textAlign:'center'}}>
+        <h1 className="sa">佐竹塾欠席連絡サイト</h1>
+        <h3 className="sa">さたやす</h3>
         {/* 行を合わせたいぜ*/}
 
       <label>学校<input type="text" style={{ padding: "7px" ,marginTop:"4px"}} value={schoolName} onChange={(e) => setSchoolName(e.target.value)}></input></label><br />
@@ -46,11 +46,7 @@ export default function Home() {
       <label>理由<input type="text" style={{ padding: "7px", marginTop: "4px" }} value={reason} onChange={(e) => setReason(e.target.value)}></input></label><br />
       
         <p>{errorText}{successText}</p>
-        <button onClick={handleCreateCard}>送信</button>
-
-      
-        </div>
-
-    
+        <button className="button">送信</button>
+    </div>
   );
 }
